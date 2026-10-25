@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{# @var location \App\Entity\Location #}
+{# @var weathers \App\Entity\Weather[] #}
+
+{% block title %}Weather in {{ location.cityName }}, {{ location.country }}{% endblock %}
+
+{% block body %}
+    <main>
+        <h1>Weather in {{ location.cityName }}, {{ location.country }}</h1>
+
+        <ul>
+            {% for weather in weathers %}
+                <li>
+                    Data: {{ weather.dateTime|date('d.m.Y') }}:
+                    Temperatura: {{ weather.temperature }}&deg;C,
+                    Wilgotność: {{ weather.humidity }}%,
+                    Ciśnienie: {{ weather.pressure }} hPa,
+                    Indeks UV: {{ weather.indexUv }}
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+{% endblock %}
