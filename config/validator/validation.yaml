@@ -1,0 +1,78 @@
+App\Entity\Location:
+    properties:
+        city_name:
+            - NotBlank:
+                  message: "Nazwa miasta nie może być pusta."
+                  groups: ['new', 'edit']
+        country:
+            - NotBlank:
+                  message: "Wybierz kraj."
+                  groups: ['new', 'edit']
+        latitude:
+            - NotBlank:
+                  message: "Szerokość jest wymagana."
+                  groups: ['new', 'edit']
+            - Range:
+                  min: -90
+                  max: 90
+                  notInRangeMessage: "Szerokość musi być pomiędzy {{ min }} a {{ max }}."
+                  groups: ['new', 'edit']
+        longitude:
+            - NotBlank:
+                  message: "Długość jest wymagana."
+                  groups: ['new', 'edit']
+            - Range:
+                  min: -180
+                  max: 180
+                  notInRangeMessage: "Długość musi być pomiędzy {{ min }} a {{ max }}."
+                  groups: ['new', 'edit']
+
+
+App\Entity\Weather:
+    properties:
+        date_time:
+            - NotNull:
+                  message: "Data i czas są wymagane."
+                  groups: ['new', 'edit']
+            -   GreaterThanOrEqual:
+                  value: "today"
+                  message: "Data nie może być wcześniejsza niż dzisiejszy dzień."
+                  groups: [ 'new', 'edit' ]
+        temperature:
+            - NotBlank:
+                  message: "Temperatura jest wymagana."
+                  groups: ['new', 'edit']
+            - Range:
+                  min: -60
+                  max: 60
+                  notInRangeMessage: "Temperatura musi wynosić od {{ min }} do {{ max }} °C."
+                  groups: ['new', 'edit']
+        humidity:
+            - Range:
+                  min: 0
+                  max: 100
+                  notInRangeMessage: "Wilgotność musi mieścić się w przedziale od {{ min }} do {{ max }}%."
+                  groups: ['new', 'edit']
+        pressure:
+            - NotBlank:
+                  message: "Ciśnienie jest wymagane."
+                  groups: ['new', 'edit']
+            - Range:
+                  min: 800
+                  max: 1200
+                  notInRangeMessage: "Ciśnienie musi wynosić od {{ min }} do {{ max }} hPa."
+                  groups: ['new', 'edit']
+        index_uv:
+            - NotBlank:
+                  message: "Indeks UV jest wymagany."
+                  groups: ['new', 'edit']
+            - Range:
+                  min: 0
+                  max: 15
+                  notInRangeMessage: "Indeks UV musi mieścić się w przedziale od {{ min }} do {{ max }}."
+                  groups: ['new', 'edit']
+        location:
+            - NotNull:
+                  message: "Lokalizacja jest wymagana."
+                  groups: ['new', 'edit']
+
