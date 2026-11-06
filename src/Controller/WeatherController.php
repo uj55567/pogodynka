@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use App\Service\WeatherUtil;
 
 #[Route('/weather')]
 final class WeatherController extends AbstractController
@@ -88,9 +89,9 @@ final class WeatherController extends AbstractController
     public function city(
         #[MapEntity(mapping: ['country' => 'country', 'city' => 'city_name'])]
         Location $location,
-        WeatherRepository $repository
+        WeatherUtil $util
     ): Response {
-        $weathers = $repository->findByLocation($location);
+        $weathers = $util->getWeatherForLocation($location);
 
         return $this->render('weather/city.html.twig', [
             'location' => $location,
