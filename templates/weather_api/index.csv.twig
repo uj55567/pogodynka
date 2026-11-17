@@ -1,0 +1,11 @@
+city,country,date,celsius,fahrenheit,humidity,pressure,index_uv
+{% for m in measurements %}
+    {{- city }},
+    {{- country }},
+    {{- m.dateTime|date('Y-m-d') }},
+    {{- m.temperature }},
+    {{- m.fahrenheit }},
+    {{- m.humidity }},
+    {{- m.pressure }},
+    {{- m.indexUv }}
+{% endfor %}

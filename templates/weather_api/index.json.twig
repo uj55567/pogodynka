@@ -1,0 +1,16 @@
+{
+    "city": "{{ city }}",
+    "country": "{{ country }}",
+    "measurements": [
+        {% for m in measurements %}
+        {
+            "date": "{{ m.dateTime|date('Y-m-d')|raw }}",
+            "celsius": {{ m.temperature|raw }},
+            "fahrenheit": {{ m.fahrenheit|raw }},
+            "humidity": {{ m.humidity|raw }},
+            "pressure": {{ m.pressure|raw }},
+            "index_uv": {{ m.indexUv|raw }}
+        }{{ loop.last ? '' : ',' }}
+        {% endfor %}
+    ]
+}
